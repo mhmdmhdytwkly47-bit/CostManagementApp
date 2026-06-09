@@ -1,0 +1,191 @@
+﻿<Window x:Class="CostManagementApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="مدیریت هزینه ها"
+        Height="750"
+        Width="1100">
+
+    <Window.Resources>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#2563EB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- عنوان -->
+        <TextBlock
+            Text="💰 سیستم مدیریت هزینه های شخصی"
+            FontSize="30"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            Margin="0,0,0,20"/>
+
+        <!-- جمع کل -->
+        <Border
+            Grid.Row="1"
+            Background="#DCFCE7"
+            CornerRadius="10"
+            Padding="15"
+            Margin="0,10">
+
+            <TextBlock
+                x:Name="TotalText"
+                FontSize="20"
+                FontWeight="Bold"
+                Text="جمع کل هزینه ها: 0 تومان"/>
+
+        </Border>
+
+        <!-- فرم -->
+        <Border
+            Grid.Row="2"
+            Background="White"
+            CornerRadius="10"
+            Padding="15"
+            Margin="0,15">
+
+            <StackPanel>
+                
+                <TextBlock
+                    Text="نام کاربر"/>
+
+                <TextBox
+                    x:Name="UserNameBox"/>
+
+                <TextBlock
+                    Text="ایمیل"/>
+
+                <TextBox
+                    x:Name="EmailBox"/>
+
+                <Button
+                    Content="ثبت کاربر"
+                    Click="AddUserButton_Click"/>
+
+                <TextBlock
+                    Text="کاربر"
+                    FontWeight="Bold"/>
+
+                <ComboBox
+                    x:Name="UserComboBox"
+                    SelectionChanged="UserComboBox_SelectionChanged"/>
+
+                <TextBlock
+                    Margin="0,10,0,0"
+                    Text="دسته بندی"
+                    FontWeight="Bold"/>
+
+                <ComboBox
+                    x:Name="CategoryComboBox"/>
+
+                <TextBlock
+                    Margin="0,10,0,0"
+                    Text="مبلغ(تومان)"
+                    FontWeight="Bold"/>
+
+                <TextBox
+                    x:Name="AmountBox"/>
+
+                <TextBlock
+                    Margin="0,10,0,0"
+                    Text="توضیحات"
+                    FontWeight="Bold"/>
+
+                <TextBox
+                    x:Name="DescriptionBox"/>
+
+                <WrapPanel Margin="0,15,0,0">
+
+                    <Button
+                        Width="150"
+                        Content="ثبت هزینه"
+                        Click="AddButton_Click"/>
+
+                    <Button
+                        Width="150"
+                        Content="ویرایش هزینه"
+                        Click="UpdateButton_Click"/>
+
+                    <Button
+                        Width="150"
+                        Content="حذف هزینه"
+                        Click="DeleteButton_Click"/>
+
+                </WrapPanel>
+
+            </StackPanel>
+
+        </Border>
+
+        <!-- جدول -->
+        <DataGrid
+            x:Name="TransactionsGrid"
+            Grid.Row="3"
+            Margin="0,15,0,0"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            RowHeight="35"
+            FontSize="14"
+            SelectionChanged="TransactionsGrid_SelectionChanged">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn
+                    Header="شناسه"
+                    Binding="{Binding id}"
+                    Width="80"/>
+
+                <DataGridTextColumn
+                    Header="مبلغ (تومان)"
+                    Binding="{Binding amount}"
+                    Width="150"/>
+
+                <DataGridTextColumn
+                    Header="توضیحات"
+                    Binding="{Binding description}"
+                    Width="250"/>
+
+                <DataGridTextColumn
+                    Header="نوع"
+                    Binding="{Binding type}"
+                    Width="120"/>
+
+                <DataGridTextColumn
+                    Header="تاریخ"
+                    Binding="{Binding transaction_date}"
+                    Width="200"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+
+</Window>
